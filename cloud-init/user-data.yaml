@@ -1,4 +1,5 @@
-#cloud-config
+---
+# cloud-config
 package_update: true
 package_upgrade: true
 
@@ -22,20 +23,21 @@ write_files:
             - "11434:11434"
           volumes:
             - ollama_data:/root/.ollama
-        
         rhasspy:
           image: rhasspy/rhasspy
           ports:
             - "12101:12101"
           volumes:
             - ./config:/profiles
-        
         db:
           image: postgres:15
           environment:
             - POSTGRES_DB=assistant_db
             - POSTGRES_USER=admin
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - POSTGRES_PASSWORD=your_secure_password_here
+          volumes:
+            - postgres_data:/var/lib/postgresql/data
 
 volumes:
   ollama_data:
+  postgres_data:
