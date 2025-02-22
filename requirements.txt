@@ -1,0 +1,28 @@
+# AI и ML библиотеки
+torch==2.0.1
+transformers==4.34.0
+numpy==1.26.0
+scipy==1.11.3
+
+# Веб-фреймворк
+fastapi==0.104.1
+uvicorn==0.24.0
+
+# База данных
+sqlalchemy==1.4.50
+alembic==1.12.1
+psycopg2-binary==2.9.9
+redis==5.0.1
+
+# Голосовой интерфейс
+sounddevice==0.4.6
+webrtcvad==2.0.10
+pyttsx3==2.90
+# Утилиты
+python-dotenv==1.0.0
+pydantic==1.10.12
+requests==2.31.0
+PyYAML==6.0.1
+
+# Мониторинг
+prometheus-client==0.19.0
