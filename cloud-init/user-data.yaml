@@ -1,0 +1,41 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - docker.io
+  - docker-compose
+  - git
+  - python3-pip
+  - nvidia-docker2
+  - build-essential
+
+write_files:
+  - path: /opt/ai-assistant/docker-compose.yml
+    permissions: '0644'
+    content: |
+      version: '3.8'
+      services:
+        core:
+          image: ollama/ollama
+          ports:
+            - "11434:11434"
+          volumes:
+            - ollama_data:/root/.ollama
+        
+        rhasspy:
+          image: rhasspy/rhasspy
+          ports:
+            - "12101:12101"
+          volumes:
+            - ./config:/profiles
+        
+        db:
+          image: postgres:15
+          environment:
+            - POSTGRES_DB=assistant_db
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+volumes:
+  ollama_data:
